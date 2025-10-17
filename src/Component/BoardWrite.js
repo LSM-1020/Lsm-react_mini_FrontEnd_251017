@@ -1,37 +1,41 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../api/axiosConfig";
 
 function BoardWrite({ user }) {
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({
-    title: "",
-    content: "",
-  });
+  const [title, setTitle] = useState(""); //제목은 공백문자열
+  const [content, setContent] = useState(""); //내용도 공백문자열
+  const [errors, setErrors] = useState({});
 
-  if (!user) {
-    return (
-      <div className="write-blocked">
-        <h2>글 작성 접근 불가</h2>
-        <p>로그인이 필요한 서비스입니다.</p>
-        <button onClick={() => navigate("/login")} className="btn-login">
-          로그인 하러 가기
-        </button>
-      </div>
-    );
-  }
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: 글쓰기 API 호출
-    alert("글 작성 기능 구현 필요");
-    // 작성 완료 후 게시판 페이지로 이동
-    navigate("/board");
+  const handleSubmit = async (e) => {
+    e.preventDefault({ title, content });
+    if (!user) {
+      alert("로그인 후 사용가능합니다");
+      return (
+        <div className="write-blocked">
+          <h2>글 작성 접근 불가</h2>
+          <p>로그인이 필요한 서비스입니다.</p>
+          <button onClick={() => navigate("/login")} className="btn-login">
+            로그인 하러 가기
+          </button>
+        </div>
+      );
+    }
+    try {
+      await api.post("/api/board", { title, content });
+      alert("글작성 완료");
+      navigate("/board");
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        //회원가입 400에러 발생
+        setErrors(err.response.data); //에러 추출,errors에 저장
+      } else {
+        console.error(err);
+        alert("글쓰기 실패");
+      }
+    }
   };
 
   return (
@@ -43,20 +47,20 @@ function BoardWrite({ user }) {
           <input
             type="text"
             name="title"
-            value={form.title}
-            onChange={handleChange}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             placeholder="제목을 입력하세요"
-            required
           />
+          {errors.title && <p style={{ color: "red" }}>{errors.title}</p>}
         </label>
         <label>
           내용
           <textarea
             name="content"
-            value={form.content}
-            onChange={handleChange}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
             placeholder="내용을 입력하세요"
-            required
+            // required
           />
         </label>
         <button type="submit" className="btn-submit">

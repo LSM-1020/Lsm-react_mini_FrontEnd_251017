@@ -31,15 +31,9 @@ function BoardPage({ user }) {
 
   const handleWrite = () => {
     if (!user) {
-      return (
-        <div className="board-blocked">
-          <h2>게시판 접근 불가</h2>
-          <p>로그인이 필요한 서비스입니다.</p>
-          <Link to="/login" className="btn-login">
-            로그인 하러 가기
-          </Link>
-        </div>
-      );
+      alert("로그인 후 이용해주세요");
+      navigate("/login");
+      return;
     }
     navigate("/board/write");
   };
