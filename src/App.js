@@ -13,6 +13,7 @@ import api from "./api/axiosConfig";
 function App() {
   const [user, setUser] = useState(null); //현재 로그인한 유저의 이름
 
+
   const checkUser = async () => {
     try {
       const res = await api.get("api/auth/me");
@@ -39,7 +40,7 @@ function App() {
         <Route path="/board" element={<BoardPage user={user} />} />
         <Route path="/login" element={<LoginPage onLogin={setUser} />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/board/:id" element={<BoardDetail user={user} />} />
+        <Route path="/board/:id" element={<BoardDetail user={user}/>} />
         <Route path="/board/Write" element={<BoardWrite user={user} />} />
       </Routes>
     </div>

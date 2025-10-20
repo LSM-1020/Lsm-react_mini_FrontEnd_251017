@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
+import api from "../api/axiosConfig";
+import PostEdit from "./PostEdit";
 
 function BoardDetail({ user }) {
   const { id } = useParams();
@@ -9,64 +11,104 @@ function BoardDetail({ user }) {
 
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [editing, setEditing] = useState(false);
 
-  const fetchComments = () => {
-    // TODO: API 호출로 댓글 목록 불러오기
-    setComments([
-      { id: 1, author: "user1", content: "첫 댓글입니다.", date: "2025-10-17" },
-      {
-        id: 2,
-        author: "user2",
-        content: "두번째 댓글입니다.",
-        date: "2025-10-18",
-      },
-    ]);
+  const loadPost = async () => {
+    try {
+      setLoading(true);
+      const res = await api.get(`/api/board/${id}`);
+      setPost(res.data);
+    } catch (err) {
+      console.error(err);
+      setError("해당 게시글은 존재하지 않습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadComments = async () => {
+    try {
+      const res = await api.get(`/api/comments/${id}`);
+      setComments(res.data);
+    } catch (err) {
+      console.error(err);
+      alert("댓글 리스트 불러오기 실패!");
+    }
+  };
+
+  const handleCommentAdded = () => {
+    loadComments();
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm("정말 삭제하시겠습니까?")) return;
+
+    try {
+      await api.delete(`/api/board/${post.id}`);
+      alert("게시글 삭제 성공!");
+      navigate("/board");
+    } catch (err) {
+      console.error(err);
+      if (err.response?.status === 403) {
+        alert("삭제 권한이 없습니다.");
+      } else {
+        alert("삭제 실패!");
+      }
+    }
   };
 
   useEffect(() => {
-    // TODO: API 호출로 게시글 데이터 불러오기
-    setPost({
-      id,
-      title: `게시글 제목 ${id}`,
-      content: `게시글 ${id}의 상세 내용입니다.`,
-      author: `user${id}`,
-      date: "2025-10-17",
-    });
-    fetchComments();
+    loadPost();
+    loadComments();
   }, [id]);
 
-  const handleCommentAdded = () => {
-    fetchComments(); // 댓글 작성 후 댓글 목록 다시 불러오기
-  };
+  if (loading) return <div>게시글을 불러오는 중입니다...</div>;
+  if (error) return <div>{error}</div>;
 
-  if (!post) {
-    return <div>게시글을 불러오는 중입니다...</div>;
+  // 수정 모드면 PostEdit 렌더링
+  if (editing) {
+    return <PostEdit post={post} setEditing={setEditing} setPost={setPost} />;
   }
 
+  // 수정 모드가 아니면 게시글 + 댓글 View
   return (
     <div className="board-detail-page">
       <h2>{post.title}</h2>
       <div className="board-detail-meta">
-        <span>작성자: {post.author}</span> | <span>{post.date}</span>
+        <span>작성자: {post.author?.username}</span> | <span>{post.date}</span>
       </div>
       <div className="board-detail-content">{post.content}</div>
 
       <div className="comments-section">
         <h3>댓글</h3>
-        <CommentList comments={comments} />
+        <CommentList comments={comments} user={user} loadComments={loadComments} />
       </div>
 
       {user ? (
-        <CommentForm postId={id} onCommentAdded={handleCommentAdded} />
+        <CommentForm postId={id} onCommentAdded={handleCommentAdded} loadComments={loadComments} user={user} />
       ) : (
         <p>댓글 작성은 로그인 후 가능합니다.</p>
       )}
 
-      {user && (
-        <button className="btn-back" onClick={() => navigate("/board")}>
-          목록으로 돌아가기
+      <div className="button-group">
+        <button className="list-button" onClick={() => navigate("/board")}>
+          글목록
         </button>
-      )}
+
+        {/* 게시글 작성자만 수정/삭제 버튼 표시 */}
+        {post?.author?.username === user && (
+          <>
+            <button className="edit-button" onClick={() => setEditing(true)}>
+              수정
+            </button>
+            <button className="delete-button" onClick={handleDelete}>
+              삭제
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 }
