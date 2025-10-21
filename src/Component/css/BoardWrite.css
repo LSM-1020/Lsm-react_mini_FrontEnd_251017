@@ -85,3 +85,78 @@
 .btn-login:hover {
   background-color: #2563eb;
 }
+
+/* 코드 입력 버튼 */
+.toggle-code-btn {
+  padding: 8px 16px;
+  background-color: #10b981; /* 초록색 */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-bottom: 15px;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-code-btn:hover {
+  background-color: #059669;
+}
+
+/* 코드 입력창 컨테이너 */
+.code-runner-container {
+  margin: 15px 0;
+  padding: 15px;
+  border: 1px solid #3b82f6;
+  border-radius: 10px;
+  background-color: #e5f1ff;
+}
+
+/* 코드 textarea */
+.code-runner-container textarea {
+  width: 100%;
+  height: 200px;
+  padding: 10px;
+  font-family: "Fira Code", Consolas, monospace;
+  font-size: 0.95rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  resize: vertical;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.code-runner-container textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+}
+
+/* 실행 버튼 */
+.code-runner-container .run-btn {
+  padding: 6px 14px;
+  margin-top: 8px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.code-runner-container .run-btn:hover {
+  background-color: #2563eb;
+}
+
+/* 실행 결과 박스 */
+.code-runner-container pre {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: "Fira Code", Consolas, monospace;
+  font-size: 0.95rem;
+}

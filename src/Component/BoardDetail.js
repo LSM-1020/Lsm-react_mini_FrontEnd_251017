@@ -5,6 +5,7 @@ import CommentList from "./CommentList";
 import api from "../api/axiosConfig";
 import PostEdit from "./PostEdit";
 import "./css/BoardDetail.css";
+import CodeRunner from "./CodeRunner"; // 코드 실행기 컴포넌트
 
 function BoardDetail({ user }) {
   const { id } = useParams();
@@ -15,6 +16,7 @@ function BoardDetail({ user }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editing, setEditing] = useState(false);
+  const [showCodeRunner, setShowCodeRunner] = useState(false); // 코드 입력창 토글
 
   const loadPost = async () => {
     try {
@@ -82,6 +84,19 @@ function BoardDetail({ user }) {
         <span>{new Date(post.createDate).toLocaleDateString()}</span>
       </div>
       <div className="board-detail-content">{post.content}</div>
+
+      <button
+        type="button"
+        className="toggle-code-btn"
+        onClick={() => setShowCodeRunner(!showCodeRunner)}
+      >
+        {showCodeRunner ? "코드 입력 닫기" : "코드 입력"}
+      </button>
+      {showCodeRunner && (
+        <div className="code-runner-container">
+          <CodeRunner />
+        </div>
+      )}
 
       <div className="comments-section">
         <h3>댓글</h3>
