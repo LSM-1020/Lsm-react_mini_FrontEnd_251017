@@ -1,0 +1,87 @@
+/* BoardWrite.css - 개발자 게시판 글쓰기 페이지 */
+
+.board-write-page {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 25px 30px;
+  background-color: #f7f9fc;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.board-write-page h2 {
+  font-size: 1.8rem;
+  color: #1d4ed8;
+  margin-bottom: 20px;
+}
+
+.board-write-form label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.board-write-form input,
+.board-write-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  resize: none;
+  transition: all 0.2s ease;
+}
+
+.board-write-form input:focus,
+.board-write-form textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+}
+
+.board-write-form p {
+  margin-top: 5px;
+  font-size: 0.85rem;
+}
+
+.btn-submit {
+  padding: 8px 18px;
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.btn-submit:hover {
+  background-color: #2563eb;
+}
+
+/* 로그인 필요 안내 박스 */
+.write-blocked {
+  background-color: #fef3f3;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.btn-login {
+  margin-top: 10px;
+  padding: 6px 14px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-login:hover {
+  background-color: #2563eb;
+}

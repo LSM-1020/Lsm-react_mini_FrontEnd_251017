@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import "./css/Navbar.css";
+
 function Navbar({ onLogout, user }) {
   return (
     <nav className="navbar">
-      <div className="logo">학교 홈페이지</div>
+      <div className="logo">Dev Community</div>
       <div className="menu">
         <Link to="/">Home</Link>
         <Link to="/board">게시판</Link>

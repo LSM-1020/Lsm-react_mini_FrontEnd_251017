@@ -4,6 +4,7 @@ import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 import api from "../api/axiosConfig";
 import PostEdit from "./PostEdit";
+import "./css/BoardDetail.css";
 
 function BoardDetail({ user }) {
   const { id } = useParams();
@@ -77,17 +78,27 @@ function BoardDetail({ user }) {
     <div className="board-detail-page">
       <h2>{post.title}</h2>
       <div className="board-detail-meta">
-        <span>작성자: {post.author?.username}</span> | <span>{post.date}</span>
+        <span>작성자: {post.author?.username}</span> |{" "}
+        <span>{new Date(post.createDate).toLocaleDateString()}</span>
       </div>
       <div className="board-detail-content">{post.content}</div>
 
       <div className="comments-section">
         <h3>댓글</h3>
-        <CommentList comments={comments} user={user} loadComments={loadComments} />
+        <CommentList
+          comments={comments}
+          user={user}
+          loadComments={loadComments}
+        />
       </div>
 
       {user ? (
-        <CommentForm postId={id} onCommentAdded={handleCommentAdded} loadComments={loadComments} user={user} />
+        <CommentForm
+          postId={id}
+          onCommentAdded={handleCommentAdded}
+          loadComments={loadComments}
+          user={user}
+        />
       ) : (
         <p>댓글 작성은 로그인 후 가능합니다.</p>
       )}
@@ -101,10 +112,10 @@ function BoardDetail({ user }) {
         {post?.author?.username === user && (
           <>
             <button className="edit-button" onClick={() => setEditing(true)}>
-              수정
+              글수정
             </button>
             <button className="delete-button" onClick={handleDelete}>
-              삭제
+              글삭제
             </button>
           </>
         )}

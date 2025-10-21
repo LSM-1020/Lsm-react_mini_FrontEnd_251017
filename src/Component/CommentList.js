@@ -1,5 +1,6 @@
 import api from "../api/axiosConfig";
 import { useState } from "react";
+import "./css/CommentList.css";
 
 function CommentList({ comments, user, loadComments }) {
   const [editingCommentId, setEditingCommentId] = useState(null);

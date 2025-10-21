@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axiosConfig";
+import "./css/BoardWrite.css";
 
 function BoardWrite({ user }) {
   const navigate = useNavigate();

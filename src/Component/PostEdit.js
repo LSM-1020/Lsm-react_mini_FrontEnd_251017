@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/axiosConfig";
+import "./css/PostEdit.css";
 
 function PostEdit({ post, setEditing, setPost }) {
   const [title, setTitle] = useState(post.title);

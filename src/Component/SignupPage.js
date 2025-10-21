@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axiosConfig";
+import "./css/SignupPage.css";
 
 function SignupPage() {
   const [username, setUsername] = useState("");
@@ -20,7 +21,7 @@ function SignupPage() {
         //회원가입 400에러 발생
         setErrors(err.response.data); //에러 추출,errors에 저장
       } else {
-        console.error("회원가입 실패", err);
+        console.error(err);
         alert("회원가입 실패");
       }
     }
@@ -39,6 +40,7 @@ function SignupPage() {
             onChange={(e) => setUsername(e.target.value)}
             placeholder="사용자 이름"
           />
+          {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
         </label>
         <label>
           비밀번호
@@ -50,6 +52,7 @@ function SignupPage() {
             placeholder="비밀번호"
             required
           />
+          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
         </label>
         <button type="submit">가입하기</button>
       </form>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/axiosConfig";
+import "./css/CommentForm.css";
 
 function CommentForm({ user, postId, onCommentAdded, loadComments }) {
   const [comment, setComment] = useState("");

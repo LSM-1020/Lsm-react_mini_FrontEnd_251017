@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import api from "../api/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import "./css/BoardPage.css";
 
 function BoardPage({ user }) {
   const [posts, setPosts] = useState([]);
@@ -61,7 +61,7 @@ function BoardPage({ user }) {
 
   return (
     <div className="container">
-      <h2>게시판</h2>
+      <h2>자유 게시판</h2>
       {loading && <p>게시판 글 리스트 로딩 중...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       <table className="board-table">
@@ -70,26 +70,29 @@ function BoardPage({ user }) {
             <th>번호</th>
             <th>제목</th>
             <th>글쓴이</th>
+            <th>조회수</th>
             <th>작성일</th>
           </tr>
         </thead>
         <tbody>
           {posts.length > 0 ? (
-            posts
-              .slice() //얕은 복사
-              .map((p, index) => (
-                <tr key={p.id}>
-                  <td>{totalItems - (index + 10 * currentPage)}</td>
-                  <td
-                    className="click-title"
-                    onClick={() => navigate(`/board/${p.id}`)}
-                  >
-                    {p.title}
-                  </td>
-                  <td>{p.author.username}</td>
-                  <td>{formatDate(p.createDate)}</td>
-                </tr>
-              ))
+            posts.map((p, index) => (
+              <tr key={p.id}>
+                <td>{totalItems - (index + 10 * currentPage)}</td>
+                <td
+                  className="click-title"
+                  onClick={() => navigate(`/board/${p.id}`)}
+                >
+                  {p.title}
+                  {p.commentCount > 0 && (
+                    <span className="comment-count">[{p.commentCount}]</span>
+                  )}
+                </td>
+                <td>{p.author.username}</td>
+                <td>{p.viewCount}</td>
+                <td>{formatDate(p.createDate)}</td>
+              </tr>
+            ))
           ) : (
             <tr>
               <td colSpan="4">게시물이 없습니다.</td>
