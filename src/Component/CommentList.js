@@ -4,6 +4,7 @@ import { useState } from "react";
 function CommentList({ comments, user, loadComments }) {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingCommentContent, setEditingCommentContent] = useState("");
+  const [errors, setErrors] = useState({});
 
   //댓글 삭제 이벤트 함수
   const handleCommentDelete = async (commentId) => {
@@ -31,7 +32,12 @@ function CommentList({ comments, user, loadComments }) {
       setEditingCommentContent("");
       loadComments(); //댓글 리스트 갱신
     } catch (err) {
-      alert("댓글 수정 실패!");
+      if (err.response && err.response.status === 400) {
+        setErrors(err.response.data);
+      } else {
+        console.error(err);
+        alert("댓글 수정 실패!");
+      }
     }
   };
 
@@ -75,6 +81,9 @@ function CommentList({ comments, user, loadComments }) {
                 >
                   저장
                 </button>
+                {errors.content && (
+                  <p style={{ color: "red" }}>{errors.content}</p>
+                )}
                 <button
                   className="comment-cancel"
                   onClick={() => setEditingCommentId(null)}

@@ -29,7 +29,7 @@ function BoardWrite({ user }) {
       navigate("/board");
     } catch (err) {
       if (err.response && err.response.status === 400) {
-        //회원가입 400에러 발생
+        //글작성 400에러 발생
         setErrors(err.response.data); //에러 추출,errors에 저장
       } else {
         console.error(err);
@@ -62,6 +62,7 @@ function BoardWrite({ user }) {
             placeholder="내용을 입력하세요"
             // required
           />
+          {errors.content && <p style={{ color: "red" }}>{errors.content}</p>}
         </label>
         <button type="submit" className="btn-submit">
           작성 완료
