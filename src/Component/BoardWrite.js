@@ -47,7 +47,7 @@ function BoardWrite({ user }) {
             onChange={(e) => setTitle(e.target.value)}
             placeholder="제목을 입력하세요"
           />
-          {errors.title && <p className="error-text">{errors.title}</p>}
+          {errors.title && <p style={{ color: "red" }}>{errors.title}</p>}
         </label>
 
         <label>
@@ -59,7 +59,7 @@ function BoardWrite({ user }) {
             placeholder="내용을 입력하세요"
             rows={8}
           />
-          {errors.content && <p className="error-text">{errors.content}</p>}
+          {errors.content && <p style={{ color: "red" }}>{errors.content}</p>}
         </label>
 
         <div className="form-buttons">
