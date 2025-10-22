@@ -66,6 +66,10 @@ function BoardWrite({ user }) {
           <button type="submit" className="btn-submit">
             작성 완료
           </button>
+          <button className="list-button" onClick={() => navigate("/board")}>
+            취소
+          </button>
+
           <button
             type="button"
             className="toggle-code-btn"

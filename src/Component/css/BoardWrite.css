@@ -23,6 +23,24 @@
   color: #374151;
 }
 
+/* 이전 버튼 */
+.list-button {
+  padding: 8px 18px;
+  background-color: #beb63b;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.list-button:hover {
+  background-color: #2563eb;
+}
+
 .board-write-form input,
 .board-write-form textarea {
   width: 100%;
