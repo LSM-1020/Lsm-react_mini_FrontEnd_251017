@@ -23,7 +23,7 @@ function CodeRunner() {
         <textarea
           value={code}
           onChange={(e) => setCode(e.target.value)}
-          placeholder="클래스 전체를 작성하세요.단 import 제외 / 예: public class Main { public static void main(String[] args) { ... } }"
+          placeholder="클래스 전체를 작성하세요.단 import문 제외 / 예: public class Main { public static void main(String[] args) { ... } }"
           className="code-input"
         />
         <button className="btn-run" type="button" onClick={handleRun}>

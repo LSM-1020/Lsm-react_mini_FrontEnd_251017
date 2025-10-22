@@ -14,7 +14,7 @@ function PostEdit({ post, setEditing, setPost }) {
       const res = await api.put(`/api/board/${post.id}`, { title, content });
       setPost(res.data); // 수정된 내용 BoardDetail로 반영
       setEditing(false); // 수정 모드 종료 -> BoardDetail View로 돌아가기
-      alert("게시글 수정 완료!");
+      alert("게시글이 수정되었습니다!");
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setErrors(err.response.data);

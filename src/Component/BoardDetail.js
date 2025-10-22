@@ -50,7 +50,7 @@ function BoardDetail({ user }) {
 
     try {
       await api.delete(`/api/board/${post.id}`);
-      alert("게시글 삭제 성공!");
+      alert("게시글이 삭제되었습니다!");
       navigate("/board");
     } catch (err) {
       console.error(err);

@@ -32,6 +32,7 @@
   border: 1px solid #e5e7eb;
   margin-bottom: 25px;
   white-space: pre-wrap;
+  text-align: left;
 }
 
 .comments-section {
