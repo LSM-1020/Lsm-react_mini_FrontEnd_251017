@@ -1,72 +1,82 @@
-/* Home.css - 게시판용 스타일 */
+/* Home.css */
+.home-container {
+  font-family: "Noto Sans KR", sans-serif;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-.container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 25px;
-  background-color: #fdfdfd;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 3rem;
+}
+
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+  margin-top: 1.5rem;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  background-color: #00b894;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #019875;
+}
+
+.features {
   text-align: center;
 }
 
-h1 {
+.features-title {
   font-size: 2rem;
-  color: #007bff;
-  margin-bottom: 15px;
+  margin-bottom: 2rem;
 }
 
-p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 10px;
+.feature-cards {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.board {
-  margin-top: 30px;
+.card {
+  background-color: #f5f6fa;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 
-.board-item {
-  background-color: #fff;
-  padding: 15px 20px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
 
-.board-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.card h3 {
+  margin-bottom: 1rem;
+  color: #2d3436;
 }
 
-.board-item h2 {
-  font-size: 1.2rem;
-  color: #007bff;
-  margin-bottom: 8px;
-}
-
-.board-item p {
-  color: #666;
+.card p {
+  color: #636e72;
   font-size: 0.95rem;
-}
-
-.btn {
-  display: inline-block;
-  padding: 8px 15px;
-  margin-top: 10px;
-  background-color: #007bff;
-  color: white;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  text-decoration: none;
-}
-
-.btn:hover {
-  background-color: #0056b3;
 }
